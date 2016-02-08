@@ -2410,6 +2410,7 @@ function Get-EntityName
 
 function Install-NuGetClientBinaries
 {
+    [CmdletBinding(SupportsShouldProcess=$true)]
     param()
 
     if($script:NuGetClient -and (Microsoft.PowerShell.Management\Test-Path $script:NuGetClient))
@@ -2430,7 +2431,7 @@ function Install-NuGetClientBinaries
     {
         $ShouldContinueQueryMessage = $LocalizedData.InstallNuGetBinariesShouldContinueQuery -f @($script:NuGetBinaryProgramDataPath,$script:NuGetBinaryLocalAppDataPath)
 
-        if($PSCmdlet.ShouldContinue($ShouldContinueQueryMessage, $LocalizedData.InstallNuGetBinariesShouldContinueCaption))
+        if($PSCmdlet.ShouldProcess($ShouldContinueQueryMessage, $LocalizedData.InstallNuGetBinariesShouldContinueCaption))
         {
             Write-Verbose -Message $LocalizedData.DownloadingNugetBinaries
 
